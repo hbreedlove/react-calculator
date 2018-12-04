@@ -1,0 +1,140 @@
+var nums =["1","2","3","4","5","6","7","8","9","0"];
+var operators = ["+","-","/","*"];
+var decimalOp = ".";
+var equals = "=";
+var clear = "C";
+var backspace = "CE";
+var defaultInput = 0;
+
+class Keys extends React.Component {
+  render() {
+    return (<div className="text-center" id="calculator">
+  <button className="btn btn-danger" id="clear" value="AC" onClick={this.props.onClick}>AC</button>
+  <button className="btn btn-danger" id="backOne" value="CE" onClick={this.props.onClick}>CE</button>
+  <button className="btn btn-primary" id="divide" value="/" onClick={this.props.onClick}>/</button>
+  <button className="btn btn-primary" id="multiply" value="*" onClick={this.props.onClick}>*</button>
+    <br/>
+  <button className="btn btn-primary" id="seven" value="7" onClick={this.props.onClick}>7</button>
+  <button className="btn btn-primary" id="eight" value="8" onClick={this.props.onClick}>8</button>
+  <button className="btn btn-primary" id="nine" value="9" onClick={this.props.onClick}>9</button>
+  <button className="btn btn-primary" id="subtract" value="-" onClick={this.props.onClick}>-</button>
+    <br/>
+  <button className="btn btn-primary" id="four" value="4" onClick={this.props.onClick}>4</button>
+  <button className="btn btn-primary" id="five" value="5" onClick={this.props.onClick}>5</button>
+  <button className="btn btn-primary" id="six" value="6" onClick={this.props.onClick}>6</button>
+  <button className="btn btn-primary" id="add" value="+" onClick={this.props.onClick}>+</button>
+    <br/>
+  <button className="btn btn-primary" id="one" value="1" onClick={this.props.onClick}>1</button>
+  <button className="btn btn-primary" id="two" value="2" onClick={this.props.onClick}>2</button>
+  <button className="btn btn-primary" id="three" value="3" onClick={this.props.onClick}>3</button>
+  <button className="btn btn-primary" id="decimal" value="." onClick={this.props.onClick}>.</button>
+    <br/>
+  <button className="btn btn-primary bigButton" id="zero" value="0" onClick={this.props.onClick}>0</button>
+  <button className="btn btn-primary bigButton" id="equals" value="=" onClick={this.props.onClick}>=</button>
+  
+</div>)
+  }
+}
+
+class Calculator extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      input: [0],
+      output: [],
+      decimal: false,
+      operator: false
+    }
+    this.handleClick = this.handleClick.bind(this);
+  } 
+  
+  calculate = () => {
+    let result = this.state.input.join("");
+    if (result) {
+      result = math.eval(result);
+      result = math.format(result, { precision: 10 });
+      result = String(result);
+      this.setState({
+        input: [result],
+        output: [result]
+      });
+    }
+  };
+  
+  handleClick(e) {
+    const value = e.target.value;
+    switch(value) {
+      case 'AC':
+      case 'CE':
+        this.setState({
+          input: [0],
+          output: [],
+          decimal: false,
+          operator: false
+        });
+        break;
+      case '+':
+      case '-':
+      case '*':
+      case '/':
+        if (this.state.operator == false &&
+        !operators.includes(this.state.input.slice(-1))) {
+          this.state.input.push(value);
+        } else if (!operators.includes(this.state.input.slice(-1))) {
+          this.state.input.pop();
+          this.state.input.push(value);
+        } 
+        this.setState({
+          input: this.state.input,
+          decimal: false,
+          operator: true
+        });
+        break;
+      case '=':
+        this.calculate();
+        break;
+      case '.':
+        if (this.state.input.slice(-1) !== '.' &&
+           this.state.decimal == false) 
+        {
+          this.state.input.push(value);
+        }
+        this.setState({
+          input: this.state.input,
+          decimal: true,
+          operator: false
+        });
+        break;
+      default:
+        if ( this.state.input == 0) 
+          this.state.input.pop();
+          this.state.input.push(value);
+          this.setState({
+            input: this.state.input,
+            operator: false
+          });
+          break;
+        
+    }
+  }
+   
+  
+  
+  render() { 
+    return (
+      <div className="text-center" id="calc-wrap">
+         <h1>My Calculator</h1>
+        <div id="display-container">
+          <span id='output'>{this.state.output}</span> 
+          <hr/>
+  <span id="display">{this.state.input}</span>
+  <hr/>
+</div>
+       
+        <Keys onClick={this.handleClick}/>
+      </div>
+    )
+  }
+  
+}
+ReactDOM.render(<Calculator/>, document.getElementById("root"));

@@ -1,0 +1,51 @@
+body, html {
+  background-color: black;
+}
+h1 {
+  color: white;
+}
+#output {
+  background-color: grey;
+  width: 320px;
+  height: 90px;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: -34px;
+  padding-top: 10px;
+  padding-bottom: 80px;
+  padding-right: 40px;
+  border-top-left-radius: 2em;
+  border-top-right-radius: 2em;
+  font-size: 40px;
+  color: white;
+  text-align: right;
+}
+#display {
+  background-color: grey;
+  width: 320px;
+  height: 60px;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  padding-top: 5px;
+  padding-right: 40px;
+  font-size: 25px;
+  color: white;
+  text-align: right;
+}
+.btn {
+  margin: 2px;
+  width: 75px;
+  height: 75px;
+}
+#calculator {
+  border: solid thin white;
+  width: 320px;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: -35px;
+  border-bottom-left-radius: 2em;
+  border-bottom-right-radius: 2em;
+}
