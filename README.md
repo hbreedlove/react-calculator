@@ -1,2 +1,2 @@
 # react-calculator
-FreeCodeCamp Front End Development Chalenge
+FreeCodeCamp Front End Development Challenge
